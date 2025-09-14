@@ -1,4 +1,5 @@
 -- Crear base de datos
+DROP DATABASE IF EXISTS tutorias;
 CREATE DATABASE IF NOT EXISTS tutorias
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;
@@ -109,9 +110,6 @@ CREATE TABLE Tutor_Puede_Impartir (
 ) ENGINE=InnoDB;
 
 
-
-
-
 -- Tutoria: almacena asignación y/o impartición
 CREATE TABLE Tutoria (
   id_tutoria INT AUTO_INCREMENT PRIMARY KEY,
@@ -119,8 +117,8 @@ CREATE TABLE Tutoria (
   DPI_alumno VARCHAR(20) NOT NULL,
   id_materia_nivel INT NOT NULL,
   fecha DATE NOT NULL,
-  hora_inicio TINYINT UNSIGNED NOT NULL, -- hora en punto (ej. 14)
-  hora_fin TINYINT UNSIGNED NOT NULL,    -- hora en punto (ej. 15)
+  hora_inicio TIME NOT NULL, -- hora en punto (ej. 14)
+  hora_fin TIME NOT NULL,    -- hora en punto (ej. 15)
   estado ENUM('asignada','cancelada','impartida','no_presento') NOT NULL DEFAULT 'asignada',
   direccion VARCHAR(120) NOT NULL,
   CHECK (hora_inicio >= 0 AND hora_inicio <= 23),
@@ -135,7 +133,9 @@ CREATE TABLE Tutoria (
 
 ) ENGINE=InnoDB;
 
-
+-- ---------------          ---------------
+-- --------------- Inciso 1 ---------------
+-- ---------------          ---------------
 CREATE TABLE Horario_Tutor (
   id_horario INT AUTO_INCREMENT PRIMARY KEY,
   id_tutor VARCHAR(20) NOT NULL,
@@ -148,9 +148,49 @@ CREATE TABLE Horario_Tutor (
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
+
+CREATE TABLE Sucursal (
+  id_sucursal INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  direccion VARCHAR(200) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE Salon (
+  id_salon INT AUTO_INCREMENT PRIMARY KEY,
+  id_sucursal INT NOT NULL,
+  nombre VARCHAR(50) NOT NULL,
+  capacidad INT DEFAULT 0,
+  FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id_sucursal)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
 ALTER TABLE Tutoria
   ADD calificacion TINYINT UNSIGNED NULL,
   ADD CHECK (calificacion IS NULL OR (calificacion BETWEEN 1 AND 5));
+
+
+ALTER TABLE Tutoria
+  ADD id_salon INT NULL,
+  ADD FOREIGN KEY (id_salon) REFERENCES Salon(id_salon)
+    ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
