@@ -148,13 +148,13 @@ CREATE TABLE Horario_Tutor (
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
-
+-- Creacion de tabla Sucursal
 CREATE TABLE Sucursal (
   id_sucursal INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(100) NOT NULL,
   direccion VARCHAR(200) NOT NULL
 ) ENGINE=InnoDB;
-
+-- Creacion de tabla Salon
 CREATE TABLE Salon (
   id_salon INT AUTO_INCREMENT PRIMARY KEY,
   id_sucursal INT NOT NULL,
@@ -163,12 +163,10 @@ CREATE TABLE Salon (
   FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id_sucursal)
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
-
+-- Modificaciones en tabla Tutoria
 ALTER TABLE Tutoria
   ADD calificacion TINYINT UNSIGNED NULL,
   ADD CHECK (calificacion IS NULL OR (calificacion BETWEEN 1 AND 5));
-
-
 ALTER TABLE Tutoria
   ADD id_salon INT NULL,
   ADD FOREIGN KEY (id_salon) REFERENCES Salon(id_salon)
