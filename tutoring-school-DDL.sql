@@ -85,7 +85,7 @@ CREATE TABLE Alumno_Nivel (
     ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (id_nivel) REFERENCES Nivel(id_nivel)
     ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT = 1;;
+) ENGINE=InnoDB AUTO_INCREMENT = 1;
 
 -- Encargado_Alumno (encargado o tutor legal de un alumno)
 CREATE TABLE Encargado_Alumno (
@@ -140,7 +140,8 @@ CREATE TABLE Horario_Tutor (
   hora_inicio TIME NOT NULL,
   hora_fin TIME NOT NULL,
   FOREIGN KEY (DPI_tutor) REFERENCES Persona(DPI)
-    ON DELETE CASCADE ON UPDATE CASCADE
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  UNIQUE (DPI_tutor, dia, hora_inicio, hora_fin)
 ) ENGINE=InnoDB;
 
 -- Creacion de tabla Sucursal
@@ -173,3 +174,11 @@ ALTER TABLE Tutoria
 
 ALTER TABLE Tutoria
   DROP COLUMN direccion;
+
+-- Evitar duplicados en Alumno_Nivel
+ALTER TABLE Alumno_Nivel
+  ADD CONSTRAINT uc_alumno_nivel UNIQUE (DPI_alumno, id_nivel);
+
+
+
+
