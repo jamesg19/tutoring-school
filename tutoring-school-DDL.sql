@@ -170,8 +170,7 @@ ALTER TABLE Tutoria
   ADD FOREIGN KEY (id_salon) REFERENCES Salon(id_salon)
     ON DELETE RESTRICT ON UPDATE CASCADE;
 
-ALTER TABLE Tutoria
-DROP COLUMN direccion;
+
 
 
 
