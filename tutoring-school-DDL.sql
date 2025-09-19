@@ -121,7 +121,7 @@ CREATE TABLE Tutoria (
   hora_inicio TIME NOT NULL, -- hora en punto (ej. 14)
   hora_fin TIME NOT NULL,    -- hora en punto (ej. 15)
   estado ENUM('asignada','cancelada','impartida','no_presento') NOT NULL DEFAULT 'asignada',
-  direccion VARCHAR(120) NOT NULL,
+  direccion VARCHAR(150) ,
   CHECK (hora_fin > hora_inicio),
   FOREIGN KEY (DPI_tutor) REFERENCES Persona(DPI)
     ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -171,9 +171,6 @@ ALTER TABLE Tutoria
   ADD FOREIGN KEY (id_salon) REFERENCES Salon(id_salon)
     ON DELETE RESTRICT ON UPDATE CASCADE;
 
-
-ALTER TABLE Tutoria
-  DROP COLUMN direccion;
 
 -- Evitar duplicados en Alumno_Nivel
 ALTER TABLE Alumno_Nivel
