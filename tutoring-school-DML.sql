@@ -1,3 +1,4 @@
+USE tutorias;
 INSERT INTO Persona (DPI, Primer_Nombre, Segundo_Nombre, Primer_Apellido, Segundo_Apellido, Fecha_Nacimiento, Direccion) VALUES
 (5802679301269, 'Alicia', 'Pascual', 'Ferrer', 'Pizarro', '2006-11-16 00:00:00', 'Calle Nuevo León 577 306\nNueva Uganda, TAB 03068'),
 (5927862084448, 'Yuridia', 'Gabriela', 'Prado', 'Lira', '1977-09-27 00:00:00', 'Retorno Guanajuato 853 837\nVieja Bangladesh, ...'),
