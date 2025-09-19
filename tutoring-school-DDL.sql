@@ -171,14 +171,5 @@ ALTER TABLE Tutoria
     ON DELETE RESTRICT ON UPDATE CASCADE;
 
 
-
-
-
-
-
-
-
-
-
-
-
+ALTER TABLE Tutoria
+  DROP COLUMN direccion;
