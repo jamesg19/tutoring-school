@@ -179,6 +179,11 @@ ALTER TABLE Tutoria
 ALTER TABLE Alumno_Nivel
   ADD CONSTRAINT uc_alumno_nivel UNIQUE (DPI_alumno, id_nivel);
 
+-- Agregar Horas exactas en tutoria
+ALTER TABLE Horario_Tutor
+  ADD CHECK (MINUTE(hora_inicio) = 0 AND SECOND(hora_inicio) = 0),
+  ADD CHECK (MINUTE(hora_fin) = 0 AND SECOND(hora_fin) = 0),
+  ADD CHECK (hora_fin > hora_inicio);
 
 
 
